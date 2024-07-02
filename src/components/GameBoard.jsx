@@ -1,50 +1,44 @@
-// import {useState} from 'react';
+export default function GameBoard({onSelectSquare, board}) {
+    // let gameBoard = initialGameBoard;
 
-const inititalGameBoard=[
-    [null,null,null],
-    [null,null,null],
-    [null,null,null]
-];
+    // for(const turn of turns)
+    // {
+    //     const { square, player } = turn;
+    //     const { row, col } = square;
 
-export default function GameBoard({onSelectSquare}) {
-    const [gameBoard, setGameBoard]=useState(inititalGameBoard);
+    //     gameBoard[row][col] = player;
+    //     // Here we are deriving states using props
+    // }
+    // const [ gameBoard, setGameBoard ] = useState(initialGameBoard);
 
-    // function handleSelectSquare(rowIndex,colIndex){
+    // function handleSelectSquare(rowIndex, colIndex){
     //     setGameBoard((prevGameBoard)=>{
-    //         const updatedBoard=[...prevGameBoard.map(innerArray=>[...innerArray])];
-    //         updatedBoard[rowIndex][colIndex]=activePlayerSymbol;
-    //         return updatedBoard;
+    //         const updatedArray = [...prevGameBoard.map(innerArray=>[...innerArray])];
+    //         updatedArray[rowIndex][colIndex] = activePlayerSymbol;
+    //         return updatedArray;
     //     });
 
     //     onSelectSquare();
     // }
-  return <ol id="game-board">
-    {gameBoard.map((row,rowIndex)=><li key={rowIndex}>
-        <ol>
-            {row.map((playerSymbol,colIndex)=>(
-                <li key={colIndex}>
-                    <button onClick={()=>handleSelectSquare(rowIndex,colIndex)}>{playerSymbol}</button>
+    return (
+        <ol id='game-board'>
+            {board.map((row, rowIndex)=>(
+                <li key={rowIndex}>
+                    <ol>
+                        {row.map((playerSymbol, colIndex)=>(
+                            <li key={colIndex}>
+                                <button 
+                                    onClick={()=>onSelectSquare(rowIndex, colIndex)}
+                                    disabled={playerSymbol!==null}>
+                                        {playerSymbol}
+                                </button>
+                            </li>
+                        ))}
+                    </ol>
                 </li>
-            ))}
+            ))
+            }
+        
         </ol>
-    </li>)}
-
-  </ol>
+    )
 }
-
-
-// return( <ol id="game-board">
-//     {inititalGameBoard.map((row,rowIndex)=>(<li key={rowIndex}>
-//         <ol>
-//             {row.map((playerSymbol,colIndex)=>(
-//                 <li key={colIndex}>
-//                     <button>
-//                         {playerSymbol}
-//                     </button>
-//                 </li>
-//             ))}
-//         </ol>
-//     </li>))}
-
-// </ol>
-// )
